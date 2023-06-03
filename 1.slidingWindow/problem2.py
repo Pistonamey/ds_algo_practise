@@ -7,22 +7,17 @@
 # O/P : length of the smallest subarray whose sum >= 'S'.
 
 def smallestLength(arr, S):
-    smallestLength = float("inf")
+    smallest_length=float("inf")
+    current_sum=0
+    window_start=0
 
-    windowStart = 0
-    windowSum = 0
-    for windowEnd in range(len(arr)):
-        windowSum += arr[windowEnd]
+    for window_end in range(len(arr)):
+        current_sum+=arr[window_end]
 
-        if windowSum >= S:
-            smallestLength = min(windowEnd-windowStart+1, smallestLength)
-            windowSum -= arr[windowStart]
-            windowStart += 1
-            while(windowSum >= S):
-                smallestLength = min(windowEnd-windowStart+1, smallestLength)
-                windowSum -= arr[windowStart]
-                windowStart += 1
-
-    return smallestLength
-
+        while(current_sum>=S):
+            smallest_length=min(smallest_length,window_end-window_start+1)
+            current_sum-=arr[window_start]
+            window_start+=1
+    
+    return smallest_length
 print(smallestLength([2,1,5,2,3,2],7))
