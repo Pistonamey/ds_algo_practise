@@ -20,13 +20,9 @@ def countServers(self, grid: List[List[int]]) -> int:
                             cur_j=cur_j+dc
                         if(cur_count>0):
                             if (i,j) not in visited:
-                                # print("if ",visited)
-                                # print(dr,dc,i,j)
                                 visited.add((i,j))
                                 total_count+=cur_count+1
                             else:
-                                # print("else ",visited)
-                                # print(dr,dc,i,j)
                                 total_count+=cur_count
         
         return total_count
