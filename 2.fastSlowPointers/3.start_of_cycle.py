@@ -5,41 +5,39 @@ class Node:
 
 
 def has_cycle(head):
-    slowPointer = head
-    fastPointer = head
+    slow=head
+    fast=head
 
-    while(fastPointer and fastPointer.next):
-        if slowPointer == fastPointer.next.next:
-            length=calculateLength(slowPointer)
-            return findStart(head,length)
-        slowPointer = slowPointer.next
-        fastPointer = fastPointer.next.next
-
+    while(fast!=None and fast.next!=None):
+        slow=slow.next
+        fast=fast.next.next
+        if(fast==slow):
+            length_of_cycle=calculate_cycle_length(slow)
+            return get_start_of_cycle(length_of_cycle,head)
     return False
 
+def calculate_cycle_length(slow):
+    current=slow
 
-def calculateLength(slowPointer):
-    current = slowPointer
-    length = 0
-    while(True):
-        length += 1
-        current = current.next
-        if(current == slowPointer):
-            return length
+    current=current.next
+    cnt=1
+    while(current!=slow):
+        current=current.next
+        cnt+=1
+    return cnt
 
-def findStart(head,length):
-    pointer1=head
-    pointer2=head
-
-    while(length>0):
-        pointer2=pointer2.next
-        length-=1
+def get_start_of_cycle(cnt,head):
+    pt1=head
+    pt2=head
+    while(cnt>0):
+        pt2=pt2.next
+        cnt-=1
+    while(pt2!=pt1):
+        pt2=pt2.next
+        pt1=pt1.next
     
-    while(pointer1!=pointer2):
-        pointer1=pointer1.next
-        pointer2=pointer2.next
-    
-    return pointer2.value
+    return pt1.value
+
 
 def main():
     head = Node(1)
@@ -48,6 +46,7 @@ def main():
     head.next.next.next = Node(4)
     head.next.next.next.next = Node(5)
     head.next.next.next.next.next = Node(6)
+    head.next.next.next.next.next.next = head.next.next
     print("LinkedList has cycle: "+str(has_cycle(head)))
 
     head.next.next.next.next.next.next = head.next.next.next
