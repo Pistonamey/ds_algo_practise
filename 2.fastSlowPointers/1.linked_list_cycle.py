@@ -4,17 +4,18 @@ class Node:
         self.next=next
 
 def has_cycle(head):
-    slowPointer=head
-    fastPointer=head
+    slow=head
+    fast=head
 
-    while(fastPointer and fastPointer.next):
-        if slowPointer==fastPointer.next.next:
+    while(fast!=None and fast.next!=None):
+        
+        slow=slow.next
+        fast=fast.next.next
+        if(slow==fast):
             return True
-
-        slowPointer=slowPointer.next
-        fastPointer=fastPointer.next.next
-
+    
     return False
+
 
 def main():
     head=Node(1)
