@@ -5,7 +5,7 @@ class Node:
 
 def has_cycle(head):
     slowPointer=head
-    fastPointer=head
+    fastPointer=headg
 
     while(fastPointer and fastPointer.next):
         if slowPointer==fastPointer.next.next:
