@@ -1,3 +1,5 @@
+
+#insert intervals
 def insertInterval(intervals,interval):
     result=[]
     for i in range(len(intervals)):
